@@ -16,8 +16,8 @@ import com.tamersarioglu.readx.presentation.books.components.BookGrid
 fun BooksListScreen(
     onBookClick: (String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: BooksViewModel = hiltViewModel()
 ) {
+    val viewModel: BooksViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Surface(
