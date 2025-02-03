@@ -1,7 +1,9 @@
 package com.tamersarioglu.readx.di
 
 import com.tamersarioglu.readx.data.api.AuthorApi
+import com.tamersarioglu.readx.data.repository.BookDetailsRepositoryImpl
 import com.tamersarioglu.readx.data.repository.BooksRepositoryImpl
+import com.tamersarioglu.readx.domain.repository.BookDetailsRepository
 import com.tamersarioglu.readx.domain.repository.BooksRepository
 import com.tamersarioglu.readx.utils.Constants
 import dagger.Module
@@ -46,6 +48,12 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideBooksRepository(repository: BooksRepositoryImpl): BooksRepository {
+        return repository
+    }
+
+    @Provides
+    @Singleton
+    fun provideBooksDetailRepository(repository: BookDetailsRepositoryImpl): BookDetailsRepository {
         return repository
     }
 }

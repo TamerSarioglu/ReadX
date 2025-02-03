@@ -28,7 +28,9 @@ fun BooksListScreen(
             is BooksUiState.Loading -> LoadingScreen()
             is BooksUiState.Success -> BookGrid(
                 books = state.books,
-                onBookClick = onBookClick
+                onBookClick = { bookId -> 
+                    onBookClick(bookId.removePrefix("/works/"))
+                }
             )
             is BooksUiState.Error -> ErrorScreen(
                 message = state.message,
