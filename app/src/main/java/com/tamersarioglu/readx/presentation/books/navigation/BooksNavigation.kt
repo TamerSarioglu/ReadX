@@ -7,12 +7,13 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.tamersarioglu.readx.presentation.books.screen.BookDetailScreen
 import com.tamersarioglu.readx.presentation.books.screen.BooksListScreen
 
 sealed class Screen(val route: String) {
     data object BooksList : Screen("books_list")
-    data object BookDetail : Screen("book_detail/{bookId}") {
-        fun createRoute(bookId: String) = "book_detail/$bookId"
+    data object BookDetail : Screen("book_detail/{workId}") {
+        fun createRoute(workId: String) = "book_detail/$workId"
     }
 }
 
@@ -29,7 +30,8 @@ fun BooksNavigation(
         composable(Screen.BooksList.route) {
             BooksListScreen(
                 onBookClick = { bookId ->
-                    navController.navigate(Screen.BookDetail.createRoute(bookId))
+                    val cleanId = bookId.replace("/", "").removePrefix("OL")
+                    navController.navigate(Screen.BookDetail.createRoute(cleanId))
                 }
             )
         }
@@ -37,10 +39,10 @@ fun BooksNavigation(
         composable(
             route = Screen.BookDetail.route,
             arguments = listOf(
-                navArgument("bookId") { type = NavType.StringType }
+                navArgument("workId") { type = NavType.StringType }
             )
         ) {
-            // BookDetailScreen implementation will go here
+            BookDetailScreen()
         }
     }
 }
