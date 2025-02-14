@@ -14,7 +14,7 @@ import javax.inject.Inject
 class BooksRepositoryImpl @Inject constructor(
     private val api: AuthorApi
 ) : BooksRepository {
-    override fun searchBooks(
+    override suspend fun searchBooks(
         searchType: SearchType,
         page: Int?
     ): Flow<Result<List<Book>>> = flow {
@@ -36,7 +36,7 @@ class BooksRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun searchAuthors(query: String): Flow<Result<List<Author>>> = flow {
+    override suspend fun searchAuthors(query: String): Flow<Result<List<Author>>> = flow {
         try {
             val response = api.searchAuthors(query)
             emit(Result.success(response.docs.map { it.toDomainModel() }))

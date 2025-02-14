@@ -6,10 +6,10 @@ import com.tamersarioglu.readx.domain.model.SearchType
 import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
-    fun searchBooks(
+    suspend fun searchBooks(
         searchType: SearchType,
         page: Int? = null
     ): Flow<Result<List<Book>>>
     
-    fun searchAuthors(query: String): Flow<Result<List<Author>>>
+    suspend fun searchAuthors(query: String): Flow<Result<List<Author>>>
 }

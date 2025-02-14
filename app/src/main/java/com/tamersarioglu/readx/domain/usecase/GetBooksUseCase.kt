@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetBooksUseCase @Inject constructor(
     private val repository: BooksRepository
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         searchType: SearchType,
         page: Int? = null
     ): Flow<Result<List<Book>>> {
