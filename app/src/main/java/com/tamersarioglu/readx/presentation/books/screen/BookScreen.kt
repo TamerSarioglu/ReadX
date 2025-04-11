@@ -41,9 +41,7 @@ fun BooksListScreen(
                 onQueryChange = { viewModel.onSearchQueryChange(it) },
                 onSearch = { viewModel.performSearch() }
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
+            Spacer(modifier = Modifier.height(8.dp))
             when (val state = uiState) {
                 is BooksUiState.Loading -> {
                     Box(
