@@ -1,6 +1,5 @@
 package com.tamersarioglu.readx.data.repository
 
-
 import com.tamersarioglu.readx.data.api.AuthorApi
 import com.tamersarioglu.readx.data.mapper.toDomainModel
 import com.tamersarioglu.readx.domain.model.Book
