@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.tamersarioglu.readx.R
 import com.tamersarioglu.readx.presentation.books.BookDetailsUiState
 
 @Composable
@@ -59,7 +61,7 @@ fun BookDetailScreen(
                     // Description
                     state.bookDetails.description?.let { description ->
                         Text(
-                            text = "Description",
+                            text = stringResource(id = R.string.book_details_description),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold
                         )
@@ -73,7 +75,7 @@ fun BookDetailScreen(
 
                     // Subjects
                     Text(
-                        text = "Subjects",
+                        text = stringResource(id = R.string.book_details_subjects),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -82,7 +84,7 @@ fun BookDetailScreen(
                     // General Subjects
                     if (state.bookDetails.subjects.general.isNotEmpty()) {
                         SubjectSection(
-                            title = "General",
+                            title = stringResource(id = R.string.book_details_subject_general),
                             items = state.bookDetails.subjects.general
                         )
                     }
@@ -90,7 +92,7 @@ fun BookDetailScreen(
                     // Places
                     if (state.bookDetails.subjects.places.isNotEmpty()) {
                         SubjectSection(
-                            title = "Places",
+                            title = stringResource(id = R.string.book_details_subject_places),
                             items = state.bookDetails.subjects.places
                         )
                     }
@@ -98,7 +100,7 @@ fun BookDetailScreen(
                     // People
                     if (state.bookDetails.subjects.people.isNotEmpty()) {
                         SubjectSection(
-                            title = "Characters",
+                            title = stringResource(id = R.string.book_details_subject_characters),
                             items = state.bookDetails.subjects.people
                         )
                     }
@@ -106,7 +108,7 @@ fun BookDetailScreen(
                     // Time Periods
                     if (state.bookDetails.subjects.times.isNotEmpty()) {
                         SubjectSection(
-                            title = "Time Periods",
+                            title = stringResource(id = R.string.book_details_subject_time_periods),
                             items = state.bookDetails.subjects.times
                         )
                     }

@@ -9,6 +9,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.tamersarioglu.readx.domain.model.Book
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun BookCard(
@@ -18,6 +19,13 @@ fun BookCard(
 ) {
     Card(
         onClick = onClick,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        ),
+        shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .fillMaxWidth()
             .height(280.dp)

@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface BooksRepository {
     suspend fun searchBooks(
         searchType: SearchType,
-        page: Int? = null
+        page: Int? = null,
+        pageSize: Int
     ): Flow<Result<List<Book>>>
     
     suspend fun searchAuthors(query: String): Flow<Result<List<Author>>>

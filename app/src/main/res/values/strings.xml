@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">ReadX</string>
+
+    <!-- Book Details -->
+    <string name="book_details_description">Description</string>
+    <string name="book_details_subjects">Subjects</string>
+    <string name="book_details_subject_general">General</string>
+    <string name="book_details_subject_places">Places</string>
+    <string name="book_details_subject_characters">Characters</string>
+    <string name="book_details_subject_time_periods">Time Periods</string>
+
+    <!-- Error Screen -->
+    <string name="error_retry">Retry</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Search books…</string>
+    <string name="search_button_content_description">Search Button</string>
+    <string name="search_filter_all">All</string>
+    <string name="search_filter_title">Title</string>
+    <string name="search_filter_author">Author</string>
+    <string name="search_filter_author_info">Author Info</string>
+
+    <!-- Error Messages (ViewModel) -->
+    <string name="error_no_internet">No internet connection. Please check your network.</string>
+    <string name="error_server">Couldn\'t reach the server. Please try again later.</string>
+    <string name="error_not_found">Could not find what you were looking for.</string>
+    <string name="error_unknown">An unexpected error occurred.</string>
+
 </resources>
