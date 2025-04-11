@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -55,7 +54,8 @@ fun SearchBar(
             placeholder = {
                 Text(
                     text = stringResource(id = R.string.search_placeholder),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.typography.bodyLarge.color.copy(alpha = 0.25f)
                 )
             },
             colors = TextFieldDefaults.colors(

@@ -13,7 +13,7 @@
     <string name="error_retry">Retry</string>
 
     <!-- Search -->
-    <string name="search_placeholder">Search books…</string>
+    <string name="search_placeholder">Search books,authors,articles…</string>
     <string name="search_button_content_description">Search Button</string>
     <string name="search_filter_all">All</string>
     <string name="search_filter_title">Title</string>
