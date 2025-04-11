@@ -14,7 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import com.tamersarioglu.readx.presentation.books.components.SearchFilter
 import com.tamersarioglu.readx.domain.model.Book
 import com.tamersarioglu.readx.R
 
@@ -30,11 +29,8 @@ class BooksViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    private val _selectedFilter = MutableStateFlow(SearchFilter.GENERAL)
-    val selectedFilter = _selectedFilter.asStateFlow()
-
     private val _currentPage = MutableStateFlow(1)
-    private val _searchType = MutableStateFlow<SearchType>(SearchType.ByAuthor("tolkien"))
+    private val _searchType = MutableStateFlow<SearchType>(SearchType.General("tolkien"))
     private val _currentBooks = MutableStateFlow<List<Book>>(emptyList())
     private var hasMoreData = true
 
@@ -46,22 +42,12 @@ class BooksViewModel @Inject constructor(
         _searchQuery.value = query
     }
 
-    fun onFilterSelected(filter: SearchFilter) {
-        _selectedFilter.value = filter
-    }
-
     fun performSearch() {
         val query = _searchQuery.value
         if (query.isNotBlank()) {
-            val newSearchType = when (_selectedFilter.value) {
-                SearchFilter.GENERAL -> SearchType.General(query)
-                SearchFilter.TITLE -> SearchType.ByTitle(query)
-                SearchFilter.AUTHOR -> SearchType.ByAuthor(query)
-                SearchFilter.AUTHOR_SEARCH -> SearchType.AuthorSearch(query)
-            }
-            _searchType.value = newSearchType
+            _searchType.value = SearchType.General(query)
         } else {
-            _searchType.value = SearchType.ByAuthor("tolkien")
+            _searchType.value = SearchType.General("")
         }
         resetAndLoadBooks()
     }
@@ -90,7 +76,11 @@ class BooksViewModel @Inject constructor(
 
         val currentSuccessState = _uiState.value as? BooksUiState.Success
         _uiState.value = if (pageToLoad == 1 || isRefresh) {
-            BooksUiState.Success(_currentBooks.value, isRefreshing = true, hasMoreData = hasMoreData)
+            BooksUiState.Success(
+                _currentBooks.value,
+                isRefreshing = true,
+                hasMoreData = hasMoreData
+            )
         } else {
             currentSuccessState?.copy(isLoadingMore = true) ?: BooksUiState.Loading
         }
@@ -145,7 +135,7 @@ class BooksViewModel @Inject constructor(
             is NetworkError.NoInternet -> context.getString(R.string.error_no_internet)
             is NetworkError.ServerError -> context.getString(R.string.error_server)
             is NetworkError.NotFound -> context.getString(R.string.error_not_found)
-            is NetworkError.Unknown -> message.takeUnless { it.isNullOrBlank() } 
+            is NetworkError.Unknown -> message.takeUnless { it.isNullOrBlank() }
                 ?: context.getString(R.string.error_unknown)
         }
     }

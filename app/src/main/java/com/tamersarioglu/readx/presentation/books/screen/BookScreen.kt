@@ -17,7 +17,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tamersarioglu.readx.presentation.books.BooksUiState
 import com.tamersarioglu.readx.presentation.books.components.BookGrid
 import com.tamersarioglu.readx.presentation.books.components.SearchBar
-import com.tamersarioglu.readx.presentation.books.components.SearchFilters
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -28,7 +27,6 @@ fun BooksListScreen(
     val viewModel: BooksViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
-    val selectedFilter by viewModel.selectedFilter.collectAsState()
 
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -39,11 +37,6 @@ fun BooksListScreen(
                 query = searchQuery,
                 onQueryChange = { viewModel.onSearchQueryChange(it) },
                 onSearch = { viewModel.performSearch() }
-            )
-
-            SearchFilters(
-                selectedFilter = selectedFilter,
-                onFilterSelected = { viewModel.onFilterSelected(it) }
             )
 
             when (val state = uiState) {
