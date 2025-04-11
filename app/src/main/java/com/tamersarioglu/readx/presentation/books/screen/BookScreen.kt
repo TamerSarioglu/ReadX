@@ -1,5 +1,6 @@
 package com.tamersarioglu.readx.presentation.books.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,7 +38,7 @@ fun BooksListScreen(
             SearchBar(
                 query = searchQuery,
                 onQueryChange = { viewModel.onSearchQueryChange(it) },
-                onSearch = { viewModel.onSearch() }
+                onSearch = { viewModel.performSearch() }
             )
 
             SearchFilters(
@@ -47,16 +48,22 @@ fun BooksListScreen(
 
             when (val state = uiState) {
                 is BooksUiState.Loading -> LoadingScreen()
-                is BooksUiState.Success -> BookGrid(
-                    books = state.books,
-                    onBookClick = { bookId ->
-                        onBookClick(bookId.removePrefix("/works/"))
+                is BooksUiState.Success -> {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        BookGrid(
+                            books = state.books,
+                            onBookClick = { bookId ->
+                                val cleanId = bookId.removePrefix("/works/")
+                                onBookClick(cleanId)
+                            },
+                            onLoadMore = { viewModel.loadNextPage() }
+                        )
                     }
-                )
+                }
 
                 is BooksUiState.Error -> ErrorScreen(
                     message = state.message,
-                    onRetryClick = viewModel::loadBooks
+                    onRetryClick = viewModel::refreshBooks
                 )
             }
         }

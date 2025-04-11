@@ -15,7 +15,8 @@ interface AuthorApi {
         @Query("title") title: String? = null,
         @Query("author") author: String? = null,
         @Query("sort") sort: String? = null,
-        @Query("page") page: Int? = null
+        @Query("page") page: Int? = null,
+        @Query("limit") limit: Int? = null
     ): BookResponse
 
     @GET("search/authors.json")

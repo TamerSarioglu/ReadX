@@ -17,9 +17,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tamersarioglu.readx.R
 
 @Composable
 fun SearchBar(
@@ -52,7 +54,7 @@ fun SearchBar(
                 .background(Color.Transparent),
             placeholder = {
                 Text(
-                    text = "Search books...",
+                    text = stringResource(id = R.string.search_placeholder),
                     style = MaterialTheme.typography.bodyLarge
                 )
             },
@@ -78,7 +80,7 @@ fun SearchBar(
         ) {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search Button",
+                contentDescription = stringResource(id = R.string.search_button_content_description),
                 tint = MaterialTheme.colorScheme.primary
             )
         }

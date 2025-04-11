@@ -16,18 +16,20 @@ class BooksRepositoryImpl @Inject constructor(
 ) : BooksRepository {
     override suspend fun searchBooks(
         searchType: SearchType,
-        page: Int?
+        page: Int?,
+        pageSize: Int
     ): Flow<Result<List<Book>>> = flow {
         try {
             val response = when (searchType) {
-                is SearchType.General -> api.searchBooks(query = searchType.query, page = page)
-                is SearchType.ByTitle -> api.searchBooks(title = searchType.title, page = page)
+                is SearchType.General -> api.searchBooks(query = searchType.query, page = page, limit = pageSize)
+                is SearchType.ByTitle -> api.searchBooks(title = searchType.title, page = page, limit = pageSize)
                 is SearchType.ByAuthor -> api.searchBooks(
                     author = searchType.author,
                     sort = searchType.sort,
-                    page = page
+                    page = page,
+                    limit = pageSize
                 )
-                is SearchType.AuthorSearch -> api.searchBooks(author = searchType.query, page = page)
+                is SearchType.AuthorSearch -> api.searchBooks(author = searchType.query, page = page, limit = pageSize)
             }
             val books = response.docs.map { it.toDomainModel() }
             emit(Result.success(books))
