@@ -22,14 +22,6 @@ class BooksRepositoryImpl @Inject constructor(
         try {
             val response = when (searchType) {
                 is SearchType.General -> api.searchBooks(query = searchType.query, page = page, limit = pageSize)
-                is SearchType.ByTitle -> api.searchBooks(title = searchType.title, page = page, limit = pageSize)
-                is SearchType.ByAuthor -> api.searchBooks(
-                    author = searchType.author,
-                    sort = searchType.sort,
-                    page = page,
-                    limit = pageSize
-                )
-                is SearchType.AuthorSearch -> api.searchBooks(author = searchType.query, page = page, limit = pageSize)
             }
             val books = response.docs.map { it.toDomainModel() }
             emit(Result.success(books))
